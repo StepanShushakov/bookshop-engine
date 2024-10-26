@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.themeleaf.org">
+<body>
+<div th:fragment="showMore (refreshshow, refreshid)" class="Cards-footer Cards-footer_center">
+    <a class="btn btn_primary"
+       href="#"
+       th:attr="data-refreshshow=${refreshshow}, data-refreshid=${refreshid}"
+       data-refreshoffset="0"
+       data-refreshlimit="20" th:text="#{middlebar.showmore}">Показать еще</a>
+</div>
+</body>
+</html>

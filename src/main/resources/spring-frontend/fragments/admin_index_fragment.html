@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<main class="Middle-main" th:fragment="index (actionFind,
+                                                enterSlugText,
+                                                collection,
+                                                actionEdit,
+                                                actionDelete,
+                                                actionChange)">
+  <form class="form" th:action="@{${actionFind}}" method="get">
+    <div class="form-group">
+      <input class="form-input" id="slug" name="slug" type="text" placeholder="Введите slug книги" data-validate="require" th:placeholder="${enterSlugText}"/>
+      <button class="btn btn_primary form-btn" type="submit" name="find" id="find" th:text="#{admin.find}">Найти
+      </button>
+    </div>
+  </form>
+  <form class="form" th:each="object : ${collection}">
+    <div class="form-group" th:if="${object.id}">
+      <span th:text="${object.name} == null ? ${object.title} : ${object.name}"/>
+      <a th:if="${actionDelete}" class="btn btn_primary form-btn"
+         th:href="@{${actionDelete} + '?id=' + ${object.id}}"
+         th:text="#{admin.delete}">Удалить
+      </a>
+      <a th:if="${actionEdit}" class="btn btn_primary form-btn"
+         th:href="@{${actionEdit} + '?id=' + ${object.id}}"
+         th:text="#{admin.edit}">Удалить
+      </a>
+      <a th:if="${actionChange}" class="btn btn_primary form-btn"
+         th:href="@{${actionChange} + '?id=' + ${object.id}}"
+         th:text="#{admin.change}">Удалить
+      </a>
+    </div>
+  </form>
+  <form class="form" th:if="${actionEdit}" th:action="@{${actionEdit}}" method="get">
+    <button class="btn btn_primary form-btn" type="submit" name="add" id="add" th:text="#{admin.add}">Найти
+    </button>
+  </form>
+</main>
+</body>
+</html>

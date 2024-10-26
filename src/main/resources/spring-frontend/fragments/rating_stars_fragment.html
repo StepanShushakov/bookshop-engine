@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <span class="Rating-stars" th:fragment="ratingStar (ratingValue, rateFlag)">
+      <span class="Rating-star Rating-star_view" th:class="(${ratingValue >= 1} ? 'Rating-star Rating-star_view' : 'Rating-star')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+              <g>
+                  <g>
+                      <path fill="#ffc000" d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                  </g>
+              </g>
+          </svg>
+      </span>
+      <input name="rating" type="radio" value="1" th:if="${rateFlag}"/>
+      <span class="Rating-star Rating-star_view" th:class="(${ratingValue >= 2} ? 'Rating-star Rating-star_view' : 'Rating-star')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+              <g>
+                  <g>
+                      <path fill="#ffc000" d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                  </g>
+              </g>
+          </svg>
+      </span>
+      <input name="rating" type="radio" value="2" th:if="${rateFlag}"/>
+      <span class="Rating-star" th:class="(${ratingValue >= 3} ? 'Rating-star Rating-star_view' : 'Rating-star')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+              <g>
+                  <g>
+                      <path fill="#ffc000" d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                  </g>
+              </g>
+          </svg>
+      </span>
+      <input name="rating" type="radio" value="3" th:if="${rateFlag}"/>
+      <span class="Rating-star" th:class="(${ratingValue >= 4} ? 'Rating-star Rating-star_view' : 'Rating-star')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+              <g>
+                  <g>
+                      <path fill="#ffc000" d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                  </g>
+              </g>
+          </svg>
+      </span>
+      <input name="rating" type="radio" value="4" th:if="${rateFlag}"/>
+      <span class="Rating-star" th:class="(${ratingValue == 5} ? 'Rating-star Rating-star_view' : 'Rating-star')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+              <g>
+                  <g>
+                      <path fill="#ffc000" d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                  </g>
+              </g>
+          </svg>
+      </span>
+      <input name="rating" type="radio" value="5" th:if="${rateFlag}"/>
+  </span>
+</body>
+</html>

@@ -1,0 +1,95 @@
+
+<!--END-->
+<!--END--><!DOCTYPE html><!--[if IE 7]>
+<html class="ie7" lang="ru">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie8" lang="ru">
+<![endif]-->
+<!--[if IE 9]>
+<html class="ie9" lang="ru">
+<![endif]-->
+<!--[if gt IE 9]><!--> <html lang="ru" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+  <title th:text="#{topbar.bookshop} + ': ' + #{admin.admin} + (${authorDto.name} != null ? ' - edit author \'' + ${authorDto.name} + '\'' : ' - add author')"/>
+  <meta name="description" content="Описание страницы">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <!--meta( http-equiv="cache-control" content="no-cache")-->
+  <!--meta( http-equiv="expires" content="0")-->
+  <!--link(rel="preload" href="assets/css/extra.min.css?v=" + version as="style" crossorigin="anonymous")-->
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/fonts.min.css?v=93601584">
+  <link rel="stylesheet" href="/assets/css/basic.min.css?v=93601584">
+  <link rel="stylesheet" href="/assets/css/extra.min.css?v=93601584"><!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script defer src="/assets/js/scripts.min.js?v=93601584"></script>
+  <script th:replace="~{fragments/change_language_scripts_fragment :: ajaxLibConnectionScript_fragment}"></script>
+  <script th:replace="~{fragments/change_language_scripts_fragment :: changeLanguageScript_fragment}"></script>
+</head>
+<body class="Site">
+  <!--if lt IE 8
+  p.error-browser
+      | Ваш браузер&nbsp;
+      em устарел!&nbsp;
+      a(href="http://browsehappy.com/") Выберите новую версию
+          +s
+          | браузера здесь&nbsp;
+      | для правильного отображения сайта.
+  -->
+  <header th:replace="~{fragments/header_fragment :: adminHeadFragment(books='menu-item',
+                                                                       authors='menu-item',
+                                                                       users='menu-item')}"></header>
+  <div class="Middle">
+    <div class="wrap">
+      <main class="Middle-main">
+        <article class="Article">
+          <div class="sdf">
+          </div>
+          <div class="Spoiler">
+            <div class="Spoiler-visible">
+              <form id="imgForm" method="POST" enctype="multipart/form-data" action="#"
+                    th:action="${'/admin/author/'+authorDto.slug+'/img/save'}">
+                <div class="pict pict_left" id="uploadButton">
+                  <img src="/assets/img/content/main/card.jpg"
+                       alt="card.jpg" th:src="(${authorDto.photo} ? ${authorDto.photo} : '/assets/img/content/authors/no-photo.svg')"/>
+                </div>
+                <input type="file" name="file" id="dialog" accept="image/*" style="display: none"/>
+              </form>
+              <form action="/admin/saveAuthor" method="post">
+                <div class="Contacts-prop" th:if="${authorDto.id} != 0">
+                  <strong class="Contacts-propTitle" th:text="#{admin.id}"></strong>
+                  <label for="id"></label><input class="form-input" id="id" name="id" type="number" readonly th:value="${authorDto.id}"/>
+                </div>
+                <div class="Contacts-prop">
+                  <strong class="Contacts-propTitle" th:text="#{admin.Slug}"></strong>
+                  <label for="slug"></label><input class="form-input" id="slug" name="slug" type="text" data-validate="require" th:value="${authorDto.slug} != null ? ${authorDto.slug} : ''" th:placeholder="#{admin.enterSlugAuthor}"/>
+                </div>
+                <div class="Contacts-prop">
+                  <strong class="Contacts-propTitle" th:text="#{admin.Name}"></strong>
+                  <label for="name"></label><input class="form-input" id="name" name="name" type="text" data-validate="require" th:value="${authorDto.name} != null ? ${authorDto.name} : ''" th:placeholder="#{admin.enterName}"/>
+                </div>
+                <div class="Contacts-prop">
+                  <strong class="Contacts-propTitle" th:text="#{admin.Description}">Биография
+                  </strong>>
+                  <label for="description"></label><textarea id="description" name="description" type="text" th:text="${authorDto.description} != null ? ${authorDto.description} : ''" th:placeholder="#{admin.enterDescription}"/>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn_primary form-btn" type="submit" name="saveAuthor" id="saveAuthor" th:text="#{admin.save}">Отправить
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+  <footer th:replace="~{fragments/footer_fragment :: footFragment}"></footer>
+  <script src="/assets/plg/jQuery/jquery-3.5.1.min.js"></script>
+  <script src="/assets/js/UploadNewImageScript.js"></script>
+</body></html>

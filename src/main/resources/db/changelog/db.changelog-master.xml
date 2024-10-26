@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <include file="db/changelog/liquibase-ChangeLog_init.xml"/>
+    <include file="db/changelog/tableTagsAdding.xml"/>
+    <include file="db/changelog/tableBookFileChangedColumnAdding.xml"/>
+    <include file="db/changelog/tableBookRatingAdding.xml"/>
+    <include file="db/changelog/tableUsersColumnsAdding.xml"/>
+    <include file="db/changelog/tableJWTBlacklistAdding.xml"/>
+    <include file="db/changelog/tableUsersColumnRoleAdding.xml"/>
+    <include file="db/changelog/tableJWTBlacklistIndexAdding.xml"/>
+    <include file="db/changelog/tableUsersColumnProviderAdding.xml"/>
+    <include file="db/changelog/tableSmsCodeAdding.xml"/>
+    <include file="db/changelog/tableBalanceTransactionsChangedColumnBookId.xml"/>
+    <include file="db/changelog/tableInvoiceAdding.xml"/>
+    <include file="db/changelog/tableInvoiceColumnBookSlugsRenamedColumnSumAdded.xml"/>
+    <include file="db/changelog/tableInvoiceColumnTimeAdded.xml"/>
+    <include file="/db/changelog/tableProfileChangeRequestsAdding.xml"/>
+    <include file="/db/changelog/tableProfileChangeIndexAdding.xml"/>
+    <include file="db/changelog/tableLastBooksAdding.xml"/>
+    <include file="db/changelog/tablesIndexesAdding.xml"/>
+    <include file="/db/changelog/data.sql"/>
+
+</databaseChangeLog>

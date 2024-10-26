@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="Card-picture" th:fragment="picture (book)">
+      <a th:href="@{'/books/' + ${book.slug}}">
+        <img th:src="${book.image}" src="/assets/img/content/main/card.jpg" alt="card.jpg"/>
+      </a>
+      <div class="Card-sale" th:text="${book.discount} + '% ' + #{book.discount}" th:if="${book.discount}">30% скидка
+      </div>
+      <div class="Card-ribbon" th:if="${book.bestseller}"><span class="Card-ribbonText">Бестселлер</span>
+      </div>
+      <a class="Card-status" title="Куплена" th:if="${book.status} == 'PAID'"><img src="/assets/img/icons/check.svg" alt="Куплена"></a>
+      <a class="Card-status" title="В корзине" th:if="${book.status} == 'CART'"><img src="/assets/img/icons/shopping-basket.svg" alt="В корзине"></a>
+      <a class="Card-status" title="Отложена" th:if="${book.status} == 'KEPT'"><img src="/assets/img/icons/heart.svg" alt="Отложена"></a>
+    </div>
+    <div class="Card-content" th:fragment="content (book)">
+      <strong class="Card-title">
+        <a href="#"
+           th:href="@{'/books/' + ${book.slug}}"
+           th:text="${book.title}"></a>
+      </strong>
+      <div class="Card-description" th:text="${book.authors}"></div>
+      <div class="Card-cost">
+        <span class="Card-priceOld" th:if="${book.discount} > 0" th:text="'₽' + ${book.price}">₽300.00</span>
+        <span class="Card-price" th:text="'₽' + (${book.discount} > 0 ? ${book.discountPrice} : ${book.price})">₽190.00</span>
+      </div>
+    </div>
+</body>
+</html>

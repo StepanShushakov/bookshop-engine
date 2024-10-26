@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="Header-menu" th:fragment="headerMenu">
+  <div class="wrap">
+    <nav class="menuModal" id="navigate">
+      <ul class="menu menu_main">
+        <li class="menu-item" th:class="${main}"><a class="menu-link" href="/index.html" th:href="@{/}" th:text="${#messages.msg('topbar.main')}">Главная</a>
+        </li>
+        <li class="menu-item" th:class="${genres}"><a class="menu-link" href="/genres/index.html" th:href="@{/genres}" th:text="#{topbar.genres}">Жанры</a>
+        </li>
+        <li class="menu-item" th:class="${recent}"><a class="menu-link" href="/books/recent.html" th:href="@{/books/recent}" th:text="#{topbar.news}">Новинки</a>
+        </li>
+        <li class="menu-item" th:class="${popular}"><a class="menu-link" href="/books/popular.html" th:href="@{/books/popular}" th:text="#{topbar.popular}">Популярное</a>
+        </li>
+        <li class="menu-item" th:class="${viewed}"><a class="menu-link" href="/authors/index.html" th:href="@{/books/viewed}" th:text="#{topbar.viewed}">Просмотренные</a>
+        </li>
+        <li class="menu-item" th:class="${authors}"><a class="menu-link" href="/authors/index.html" th:href="@{/authors}" th:text="#{topbar.authors}">Авторы</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</body>
+</html>

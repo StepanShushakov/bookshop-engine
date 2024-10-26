@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="tables-indexes-adding" author="admin">
+        <createIndex tableName="book2user_type" indexName="idx_book2user_type" >
+            <column name="code"/>
+        </createIndex>
+        <createIndex tableName="book2user" indexName="idx_book2user" >
+            <column name="user_id"/>
+            <column name="book_id"/>
+            <column name="type_id"/>
+        </createIndex>
+        <createIndex tableName="book2author" indexName="idx_book2author">
+            <column name="book_id"/>
+            <column name="author_id"/>
+        </createIndex>
+        <createIndex tableName="book2genre" indexName="idx_book2genre">
+            <column name="book_id"/>
+            <column name="genre_id"/>
+        </createIndex>
+        <createIndex tableName="book2tag" indexName="idx_book2tag">
+            <column name="book_id"/>
+            <column name="tag_id"/>
+        </createIndex>
+        <createIndex tableName="book_rating" indexName="idx_book_rating">
+            <column name="book_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

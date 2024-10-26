@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <div class="ProductCard" th:fragment="productCart (slugBookDto, ratingsCount, ratinfDistributionDto)">
+  <div class="ProductCard-look">
+    <form id="imgForm" method="POST" enctype="multipart/form-data" action="#"
+          th:action="${'/admin/book/'+slugBookDto.slug+'/img/save'}">
+      <div class="ProductCard-photo" id="uploadButton"><img th:src="${slugBookDto.image}"
+                                                            src="/assets/img/content/main/card.jpg"
+                                                            alt="card.jpg"/>
+      </div>
+      <input type="file" name="file" id="dialog" accept="image/*" style="display: none"/>
+    </form>
+  </div>
+  <div class="ProductCard-desc">
+    <div class="ProductCard-header">
+      <h1 class="ProductCard-title" th:text="${slugBookDto.title}">Мара и морок
+      </h1>
+      <div class="ProductCard-author"><span class="ProductCard-titleProp"
+                                            th:text="#{book.author}">Автор:</span>&#32;
+        <th:block th:each="author,iState : ${slugBookDto.autorList}">
+          <span th:if="!${iState.first}">,&#32;</span>
+          <a href="#" th:href="@{'/authors/' + ${author.slug}}" th:text="${author.name}">Лия Арден</a>
+        </th:block>
+      </div>
+      <div class="ProductCard-rating" th:replace="~{fragments/book_rating_fragment :: rating (ratingValue = ${slugBookDto.rating}, ratingsCount = ${ratingsCount}, ratindDistrDto = ${ratingDistributionDto})}"></div>
+      <div class="ProductCard-assessment">
+        <span class="ProductCard-titleProp" th:text="#{book.rate}">Оцените книгу:</span>
+        <span class="Rating Rating_input" data-bookid="2121" th:attr="data-bookid = ${slugBookDto.id}">
+          <span class="Rating-stars" th:replace="~{fragments/rating_stars_fragment :: ratingStar (ratingValue = ${userRatingValue}, rateFlag = true)}">
+          </span>
+        </span>
+      </div>
+      <div class="ProductCard-tags"><span class="ProductCard-titleProp" th:text="#{book.tags}">Тэги:</span>
+        <th:block th:each="tag, iState : ${slugBookDto.tagList}">
+          <span th:if="!${iState.first}">,&#32;</span>
+          <a th:href="'/tags/' + ${tag.name}" th:text="${tag.name}">Современные</a>
+        </th:block>
+      </div>
+      <div class="ProductCard-cost"><span class="ProductCard-titleProp" th:text="#{book.price}">Цена:</span>
+        <span class="ProductCard-priceOld"
+              th:if="${slugBookDto.discount} > 0" th:text="'₽' + ${slugBookDto.price}">₽300</span>
+        <span class="ProductCard-price"
+              th:text="'₽' + (${slugBookDto.discount} > 0 ? ${slugBookDto.discountPrice} : ${slugBookDto.price})">₽180</span>
+      </div>
+      <!--+div.-info
+      //+div.-cost
+      //    +div.-price $55.00
+      //    +div.-priceOld $115.00
+      //+div.-compare
+      //    +btn._default
+      //        +img('change.svg','icons/card').-icon
+      -->
+    </div>
+    <div class="ProductCard-text">
+      <p th:text="${bookDescription}">Таких, как я, называют Марами - отмеченными самой богиней смерти Мораной. Когда-то у меня и моих шести сестер был свой путь. Тогда люди нас уважали и просили о милосердии. Они приносили нам подношения и молились нам. Но 200 лет назад все изменилось, когда принц Серата осмелился поднять руку на одну из нас. Я пыталась отомстить, но погибли мы все. Теперь правители Аракена, погрязшие в длительной войне со своим соседом Сератом, решили вернуть меня к жизни. Дать второй шанс на месть и свободу, привязав меня к тому, против кого я никогда не пойду. Таких, как он, называют Морок, и их боятся абсолютно все.
+      </p>
+    </div>
+    <div class="ProductCard-cart">
+      <!--+div.-cartElement.-cartElement_amount-->
+      <!--    +Amount._product-->
+      <div class="ProductCard-cartElement">
+        <button class="btn btn_primary btn_outline" data-sendstatus="KEPT"
+                th:class="${postponedInCookie} ? 'btn btn_primary btn_outline btn_check' : 'btn btn_primary btn_outline'"
+                th:attr="data-bookid = '['+${slugBookDto.id}+']', data-alttext = #{book.postponed}" data-btntype="check" data-btnradio="buyblock" data-check="false">
+          <span class="btn-icon"><img src="/assets/img/icons/heart.svg" alt="heart.svg"/></span>
+          <span class="btn-content" th:text="#{book.postpone}">Отложить</span>
+        </button>
+      </div>
+      <div class="ProductCard-cartElement">
+        <button class="btn btn_primary btn_outline" data-sendstatus="CART"
+                th:attr="data-bookid = '['+${slugBookDto.id}+']', data-alttext = #{book.inCart}" data-btntype="check" data-btnradio="buyblock" data-check="false">
+          <span class="btn-icon"><img src="/assets/img/icons/shopping-basket.svg" alt="shopping-basket.svg"/></span><span class="btn-content" th:text="#{book.buy}">Купить</span>
+        </button>
+      </div>
+    </div>
+    <div class="ProductCard-cart">
+      <!--+div.-cartElement.-cartElement_amount-->
+      <!--    +Amount._product-->
+      <div class="ProductCard-cartElement">
+        <a class="btn btn_primary btn_outline" href="#">
+                    <span class="btn-icon">
+                      <img src="/assets/img/icons/download.svg" alt="download.svg"/>
+                    </span>
+          <span class="btn-content" th:text="#{book.download}">Скачать</span>
+        </a>
+      </div>
+      <div class="ProductCard-cartElement">
+        <button class="btn btn_primary btn_outline" data-sendstatus="ARCHIVED" data-btntype="check" data-btnradio="buyblock" data-check="false"
+                th:attr="data-bookid = '['+${slugBookDto.id}+']', data-alttext = #{book.fromArchive}"><span class="btn-icon"><img src="/assets/img/icons/archive.svg" alt="archive.svg"/></span><span class="btn-content" th:text="#{book.toArchive}">В архив</span>
+        </button>
+      </div>
+    </div>
+    <div id="myPopup">
+      <p th:text="#{book.downloadLinks}">Ссылки для скачивания</p>
+      <div th:each="bookFile : ${slugBookDto.getBookFiles()}">
+        <a href="#" th:href="${'/books/download/' + bookFile.hash}"
+           th:text="${bookFile.getBookFileExtensionString()}"></a>
+      </div>
+      <span id="myPopup__close" class="close">X</span>
+    </div>
+    <div id="myOverlay"></div>
+    <!--+div.-cart-->
+    <!--    //+div.-cartElement.-cartElement_amount-->
+    <!--    //    +Amount._product-->
+    <!--    +div.-cartElement-->
+    <!--        +btn('button')(data-sendstatus='UNLINK' data-bookid="[1111]")._muted Вернуть из архива-->
+  </div>
+</div>
+</body>
+</html>

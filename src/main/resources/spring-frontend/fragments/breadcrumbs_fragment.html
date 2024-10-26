@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul class="breadcrumbs" th:fragment="breadcrumbs (selectionName)">
+    <li class="breadcrumbs-item"><a href="/index.html" th:href="@{/}" th:text="#{topbar.main}">Главная</a>
+    </li>
+    <li class="breadcrumbs-item"><a href="/genres/index.html" th:href="@{/genres}" th:text="#{topbar.books}">Книги</a>
+    </li>
+    <li class="breadcrumbs-item breadcrumbs-item_current" th:utext="'<span>' + ${selectionName} + '</span>'"><span>Популярное</span>
+    </li>
+</ul>
+<ul class="breadcrumbs" th:fragment="breadcrumbs_my">
+    <li class="breadcrumbs-item"><a href="/index.html" th:href="@{/}" th:text="#{topbar.main}">Главная</a>
+    </li>
+    <li class="breadcrumbs-item"><a href="/profile.html" th:href="@{/profile}" th:text="#{user.myProfile}">Мой профиль</a>
+    </li>
+    <li class="breadcrumbs-item breadcrumbs-item_current" th:utext="'<span>' + #{user.myBooks} + '</span>'"><span>Мои книги</span>
+    </li>
+</ul>
+<ul class="breadcrumbs" th:fragment="breadcrumbs_fast (selectionName)">
+    <li class="breadcrumbs-item"><a href="/index.html" th:href="@{/}" th:text="#{topbar.main}">Главная</a>
+    </li>
+    <li class="breadcrumbs-item breadcrumbs-item_current" th:utext="'<span>' + ${selectionName} + '</span>'"><span>Контакты</span>
+    </li>
+</ul>
+<ul class="breadcrumbs" th:fragment="breadcrumbs_documents (selectionName)">
+    <li class="breadcrumbs-item"><a href="/index.html" th:href="@{/}" th:text="#{topbar.main}">Главная</a>
+    </li>
+    <li class="breadcrumbs-item"><a href="/documents/index.html" th:href="@{/documents}" th:text="#{documents.documents}">Документы</a>
+    </li>
+    <li class="breadcrumbs-item breadcrumbs-item_current" th:utext="'<span>' + ${selectionName} + '</span>'"><span>Политика обработки персональных данных</span>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="Tags" id="tags" th:fragment="bookTags">
+    <div th:each="tagDto: ${tagCountDtoList}"  th:class="${tagDto.tagClass}">
+        <a th:text="${tagDto.name}" th:href="'/tags/'+${tagDto.name}"/>
+    </div>
+</div>
+</body>
+</html>

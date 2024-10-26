@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="Tags" th:fragment="genreTags (title)">
+        <div class="Tags-title">
+            <div class="Tag">
+                <a th:href="${'/genres/' + title.slug}" th:utext="${title.name} + '<span class=undefined-amount> (' + ${title.booksCount} + ') </span>'">
+                </a>
+            </div>
+        </div>
+        <th:block th:each="child : ${title.children}">
+            <div class="Tag" th:if="${child.children.isEmpty}">
+                <a th:href="${'/genres/' + child.slug}" th:utext="${child.name} + '<span class=undefined-amount> (' + ${child.booksCount} + ') </span>'">
+                </a>
+            </div>
+           <th:block th:if="${!child.children.isEmpty}">
+               <div th:replace="~{fragments/genre_fragment :: genreTags (title = ${child})}"></div>
+           </th:block>
+        </th:block>
+    </div>
+</body>
+</html>

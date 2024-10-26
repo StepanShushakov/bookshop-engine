@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="headFragment">
+    <th:block th:if="${curUser.name} != null">
+        <header th:replace="~{fragments/header_my_fragment :: headFragment(main=${main},
+                                                                             genres=${genres},
+                                                                             recent=${recent},
+                                                                             popular=${popular},
+                                                                             authors=${authors},
+                                                                             viewed=${viewed})}"></header>
+    </th:block>
+    <th:block th:if="${curUser.name} == null">
+        <header th:replace="~{fragments/header_common_fragment :: headFragment(main=${main},
+                                                                             genres=${genres},
+                                                                             recent=${recent},
+                                                                             popular=${popular},
+                                                                             authors=${authors})}"></header>
+    </th:block>
+</th:block>
+<header th:fragment="adminHeadFragment">
+    <div class="Header-menu" th:fragment="headerMenu(books=${books},
+                                                    authors=${authors},
+                                                    users=${users})">
+        <div class="wrap">
+            <nav class="menuModal" id="navigate">
+                <ul class="menu menu_main">
+                    <li class="menu-item" th:class="${books}"><a class="menu-link" th:href="@{/admin/book}" th:text="#{topbar.books}"></a>
+                    </li>
+                    <li class="menu-item" th:class="${authors}"><a class="menu-link" th:href="@{/admin/author}" th:text="#{topbar.authors}"></a>
+                    </li>
+                    <li class="menu-item" th:class="${users}"><a class="menu-link" th:href="@{/admin/user}" th:text="#{admin.users}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+</body>
+</html>

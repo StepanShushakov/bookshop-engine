@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="Cards Cards_refresh" th:fragment="booksPool (booksList)">
+  <div class="Card" th:each="book: ${booksList}">
+    <div th:replace="~{fragments/book_cart_fragment :: picture (book = ${book})}"></div>
+    <div th:replace="~{fragments/book_cart_fragment :: content (book = ${book})}"></div>
+  </div>
+</div>
+</body>
+</html>
